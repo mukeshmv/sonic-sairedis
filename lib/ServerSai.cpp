@@ -81,7 +81,7 @@ sai_status_t ServerSai::apiInitialize(
 
     auto status = m_sai->apiInitialize(flags, service_method_table);
 
-    SWSS_LOG_NOTICE("init client/server sai: %s", sai_serialize_status(status).c_str());
+    SWSS_LOG_NOTICE("init server sai: %s", sai_serialize_status(status).c_str());
 
     if (status == SAI_STATUS_SUCCESS)
     {
@@ -145,6 +145,7 @@ sai_status_t ServerSai::create(
     SWSS_LOG_ENTER();
     REDIS_CHECK_API_INITIALIZED();
 
+    SWSS_LOG_INFO("++++++ Invoked ServerSai::create ++++++");
     return m_sai->create(
             objectType,
             objectId,
@@ -383,6 +384,7 @@ sai_status_t ServerSai::bulkCreate(
     SWSS_LOG_ENTER();
     REDIS_CHECK_API_INITIALIZED();
 
+    SWSS_LOG_INFO("++++++ Invoked ServerSai::bulkCreate ++++++");
     return m_sai->bulkCreate(
             object_type,
             switch_id,
@@ -466,6 +468,7 @@ sai_status_t ServerSai::bulkCreate(                         \
     MUTEX();                                                \
     SWSS_LOG_ENTER();                                       \
     REDIS_CHECK_API_INITIALIZED();                          \
+    SWSS_LOG_INFO("++++++ Invoked ServerSai::bulkCreate entry ++++++"); \
     return m_sai->bulkCreate(                               \
             object_count,                                   \
             entries,                                        \

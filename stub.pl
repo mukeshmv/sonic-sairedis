@@ -83,6 +83,7 @@ sub GetFunctionCamelCaseName
     my $fun = shift;
 
     $fun =~ s/^sai_//;
+    $fun =~ s/^bulk_object_/bulk_/;
 
     my @tokens = split/_/,$fun;
 
@@ -261,6 +262,7 @@ sub CreateApiStricts()
                 next;
             }
 
+	    Write "    SWSS_LOG_INFO(\"++++++ Invoked sai_redis ${STUB}_$funname ++++++ \");";
             Write "    return $STUB" . "->$fname(@par);" if $OT eq "";
             Write "    return $STUB" . "->$fname(@par);" if $OT ne "" and $bulk == 1 and $entry == 1;
             Write "    return $STUB" . "->$fname(@par);" if $OT ne "" and $bulk == 0 and $entry == 1;
@@ -378,7 +380,7 @@ sub CreateGlobalApis
         Write "    SWSS_LOG_ENTER();";
         Write "";
 
-        if ($fun =~ /(bulkObjectClearStats|bulkObjectGetStats|dbgGenerateDump|getMaximumAttributeCount|getObjectKey|bulkGetAttribute|dbgGenerateDump|tamTelemetryGetData|getObjectCount|queryObjectStage)/)
+        if ($fun =~ /(dbgGenerateDump|getMaximumAttributeCount|getObjectKey|bulkGetAttribute|dbgGenerateDump|tamTelemetryGetData|getObjectCount|queryObjectStage)/)
         {
             Write "    SWSS_LOG_ERROR(\"FIXME, no implementation for $fun!\");";
             Write "    return SAI_STATUS_NOT_IMPLEMENTED;";
@@ -386,6 +388,7 @@ sub CreateGlobalApis
             next;
         }
 
+	Write "    SWSS_LOG_INFO(\"++++++ Invoked sai_redis $funname ++++++ \");";
         Write "    return $STUB" . "->$fun(@par);";
         Write "}";
         Write "";

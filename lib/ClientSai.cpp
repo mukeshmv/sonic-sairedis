@@ -378,6 +378,7 @@ sai_status_t ClientSai::bulkCreate(                                            \
         std::string str_object_id = sai_serialize_ ##ot (ot[idx]);             \
         serialized_object_ids.push_back(str_object_id);                        \
     }                                                                          \
+    SWSS_LOG_INFO("++++++ Invoked ClientSai::bulkCreate entry ++++++"); \
     auto status = bulkCreate(                                                  \
             (sai_object_type_t)SAI_OBJECT_TYPE_ ## OT,                         \
             serialized_object_ids,                                             \
@@ -478,6 +479,7 @@ sai_status_t ClientSai::create(
         entry.push_back(null);
     }
 
+    SWSS_LOG_INFO("++++++ Invoked ClientSai::create ++++++");
     auto serializedObjectType = sai_serialize_object_type(object_type);
 
     const std::string key = serializedObjectType + ":" + serializedObjectId;
@@ -1141,6 +1143,7 @@ sai_status_t ClientSai::bulkCreate(
 
     std::vector<std::string> serialized_object_ids;
 
+    SWSS_LOG_INFO("++++++ Invoked ClientSai::bulkCreate ++++++");
     // server is responsible for generate new OID but for that we need switch ID
     // to be sent to server as well, so instead of sending empty oids we will
     // send switch IDs

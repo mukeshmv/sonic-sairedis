@@ -228,6 +228,7 @@ sai_status_t RedisRemoteSaiInterface::create(
             attr_count,
             attr_list);
 
+    SWSS_LOG_INFO("++++++ Invoked RedisRemoteSaiInterface::create ++++++");
     if (objectType == SAI_OBJECT_TYPE_SWITCH && status == SAI_STATUS_SUCCESS)
     {
         /*
@@ -727,6 +728,7 @@ sai_status_t RedisRemoteSaiInterface::bulkCreate(                               
         std::string str_object_id = sai_serialize_ ##ot (ot[idx]);                           \
         serialized_object_ids.push_back(str_object_id);                                      \
     }                                                                                        \
+    SWSS_LOG_INFO("++++++ Invoked RedisRemoteSaiInterface::bulkCreate entry ++++++");        \
     auto status = bulkCreate(                                                                \
             (sai_object_type_t)SAI_OBJECT_TYPE_ ## OT,                                       \
             serialized_object_ids,                                                           \
@@ -824,7 +826,7 @@ sai_status_t RedisRemoteSaiInterface::create(
 
     const std::string key = serializedObjectType + ":" + serializedObjectId;
 
-    SWSS_LOG_DEBUG("generic create key: %s, fields: %" PRIu64, key.c_str(), entry.size());
+    SWSS_LOG_INFO("RedisRemoteSaiInterface: generic create key: %s, fields: %" PRIu64, key.c_str(), entry.size());
 
     m_recorder->recordGenericCreate(key, entry);
 
@@ -1707,6 +1709,7 @@ sai_status_t RedisRemoteSaiInterface::bulkCreate(
         serialized_object_ids.push_back(str_object_id);
     }
 
+    SWSS_LOG_INFO("++++++ Invoked RedisRemoteSaiInterface::bulkCreate ++++++");
     return bulkCreate(
             object_type,
             serialized_object_ids,
