@@ -75,7 +75,9 @@ syncd_LDFLAGS = $(LDFLAGS_ASAN) -rdynamic
 if SAITHRIFT
 libSyncd_a_CXXFLAGS += -DSAITHRIFT=yes
 syncd_CXXFLAGS += -DSAITHRIFT=yes
-syncd_LDADD += -lrpcserver -lthrift
+syncd_LDADD += -lrpcserver
+syncd_LDADD += -lthrift-0.14.1
+#syncd_LDADD += -lthrift
 endif
 
 if SONIC_ASIC_PLATFORM_BROADCOM

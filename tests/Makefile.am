@@ -12,7 +12,7 @@ vssyncd_LDADD = $(top_srcdir)/syncd/libSyncd.a $(top_srcdir)/lib/libSaiRedis.a \
 				-L$(top_srcdir)/meta/.libs -lsaimetadata -lsaimeta -ldl -lzmq $(CODE_COVERAGE_LIBS)
 
 if SAITHRIFT
-vssyncd_LDADD += -lrpcserver -lthrift
+vssyncd_LDADD += -lrpcserver -lthrift-0.14.1
 endif
 
 tests_SOURCES = tests.cpp
